@@ -17,4 +17,10 @@
   <div>
     <app-wave-audio audioUrl="assets/audio.mp3" />
   </div>
+
+  <p>with init: {{$withInit()}} </p>
+  <button (click)="emitWithInit()">emit with init</button>
+
+  <p>without init: {{$withoutInit()}} </p>
+  <button (click)="emitWithoutInit()">emit without init</button>
 </div>
