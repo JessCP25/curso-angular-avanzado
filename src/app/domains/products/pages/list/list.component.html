@@ -4,6 +4,8 @@
     <p>Error {{categoriesResource.error()}} </p>
     <button (click)="resetCategories()">Reset</button>
     <button (click)="reloadCategories()" >Reload</button>
+    <button (click)="reloadProducts()" >Reload products</button>
+
     <ul class="text-center md:text-left">
       <li>
         <a routerLink="/">All</a>
@@ -18,7 +20,7 @@
     </ul>
   </div>
   <div class="grid grid-cols-2 gap-8 w-full md:grid-cols-4">
-    @for (product of products(); track product) {
+    @for (product of productsResource.value(); track product) {
       <app-product [product]="product" (addToCart)="addToCart($event)" />
     }
   </div>

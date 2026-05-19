@@ -1,8 +1,6 @@
 import {
   Component,
   inject,
-  signal,
-  OnChanges,
   input
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -20,13 +18,13 @@ import { toSignal, rxResource } from '@angular/core/rxjs-interop';
   imports: [CommonModule, ProductComponent, RouterLinkWithHref],
   templateUrl: './list.component.html',
 })
-export default class ListComponent implements OnChanges {
+export default class ListComponent {
   private cartService = inject(CartService);
   private productService = inject(ProductService);
   private categoryService = inject(CategoryService);
   readonly slug = input<string>();
 
-  products = signal<Product[]>([]);
+  // products = signal<Product[]>([]);
   // $categories = toSignal(this.categoryService.getAll(), {
   //   initialValue: []
   // })
@@ -34,24 +32,29 @@ export default class ListComponent implements OnChanges {
     loader: ()=> this.categoryService.getAll()
   })
 
-  ngOnChanges() {
-    this.getProducts();
-  }
+  productsResource = rxResource({
+    request: ()=> ({category_slug: this.slug()}),
+    loader: ({request})=> this.productService.getProducts(request)
+  })
+
+  // ngOnChanges() {
+  //   this.getProducts();
+  // }
 
   addToCart(product: Product) {
     this.cartService.addToCart(product);
   }
 
-  private getProducts() {
-    this.productService.getProducts({category_slug: this.slug()}).subscribe({
-      next: (products) => {
-        this.products.set(products);
-      },
-      error: () => {
-        console.log('Error al obtener productos');
-      },
-    });
-  }
+  // private getProducts() {
+  //   this.productService.getProducts({category_slug: this.slug()}).subscribe({
+  //     next: (products) => {
+  //       this.products.set(products);
+  //     },
+  //     error: () => {
+  //       console.log('Error al obtener productos');
+  //     },
+  //   });
+  // }
 
   resetCategories(){
     this.categoriesResource.set([]);
@@ -59,5 +62,9 @@ export default class ListComponent implements OnChanges {
 
   reloadCategories(){
     this.categoriesResource.reload();
+  }
+
+  reloadProducts(){
+    this.productsResource.reload();
   }
 }
