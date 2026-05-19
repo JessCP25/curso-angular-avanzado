@@ -14,4 +14,10 @@ export class CategoryService {
       `${environment.apiUrl}/api/v1/categories`,
     );
   }
+
+  getAllPromises(){
+    return fetch(`${environment.apiUrl}/api/v1/categories`)
+    .then(response => response.json())
+    .then(data => data);
+  }
 }

@@ -1,7 +1,8 @@
 import {
   Component,
   inject,
-  input
+  input,
+  resource
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLinkWithHref } from '@angular/router';
@@ -11,7 +12,7 @@ import { Product } from '@shared/models/product.model';
 import { CartService } from '@shared/services/cart.service';
 import { ProductService } from '@shared/services/product.service';
 import { CategoryService } from '@shared/services/category.service';
-import { toSignal, rxResource } from '@angular/core/rxjs-interop';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-list',
@@ -28,8 +29,12 @@ export default class ListComponent {
   // $categories = toSignal(this.categoryService.getAll(), {
   //   initialValue: []
   // })
-  categoriesResource = rxResource({
-    loader: ()=> this.categoryService.getAll()
+  // categoriesResource = rxResource({
+  //   loader: ()=> this.categoryService.getAll()
+  // })
+
+  categoriesResource = resource({
+    loader: ()=> this.categoryService.getAllPromises()
   })
 
   productsResource = rxResource({
