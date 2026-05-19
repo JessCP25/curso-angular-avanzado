@@ -1,10 +1,10 @@
 <div class="flex mt-5 flex-col md:flex-row md:space-x-4">
   <div class="w-full mb-4 md:w-56">
-    <p>Loading {{categoriesResource.isLoading()}} </p>
-    <p>Error {{categoriesResource.error()}} </p>
+    <p>Loading {{ categoriesResource.isLoading() }}</p>
+    <p>Error {{ categoriesResource.error() }}</p>
     <button (click)="resetCategories()">Reset</button>
-    <button (click)="reloadCategories()" >Reload</button>
-    <button (click)="reloadProducts()" >Reload products</button>
+    <button (click)="reloadCategories()">Reload</button>
+    <button (click)="reloadProducts()">Reload products</button>
 
     <ul class="text-center md:text-left">
       <li>
@@ -12,9 +12,7 @@
       </li>
       @for (category of categoriesResource.value(); track category) {
         <li>
-          <a routerLink="/category/{{category.slug}}">{{
-            category.name
-          }}</a>
+          <a routerLink="/category/{{ category.slug }}">{{ category.name }}</a>
         </li>
       }
     </ul>

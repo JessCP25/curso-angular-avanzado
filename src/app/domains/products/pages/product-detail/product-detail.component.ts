@@ -1,4 +1,11 @@
-import { Component, inject, signal, OnInit, input, linkedSignal } from '@angular/core';
+import {
+  Component,
+  inject,
+  signal,
+  OnInit,
+  input,
+  linkedSignal,
+} from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ProductService } from '@shared/services/product.service';
 import { Product } from '@shared/models/product.model';
@@ -15,13 +22,13 @@ export default class ProductDetailComponent implements OnInit {
   $cover = linkedSignal({
     source: this.$product,
     computation: (product, previousValue) => {
-      if(product && product.images.length > 0){
+      if (product && product.images.length > 0) {
         return product.images[0];
       }
 
       return previousValue?.value;
-    }
-  })
+    },
+  });
   private productService = inject(ProductService);
   private cartService = inject(CartService);
 

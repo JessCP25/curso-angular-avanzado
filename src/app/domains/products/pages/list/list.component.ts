@@ -1,9 +1,4 @@
-import {
-  Component,
-  inject,
-  input,
-  resource
-} from '@angular/core';
+import { Component, inject, input, resource } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLinkWithHref } from '@angular/router';
 import { ProductComponent } from '@products/components/product/product.component';
@@ -34,13 +29,13 @@ export default class ListComponent {
   // })
 
   categoriesResource = resource({
-    loader: ()=> this.categoryService.getAllPromises()
-  })
+    loader: () => this.categoryService.getAllPromises(),
+  });
 
   productsResource = rxResource({
-    request: ()=> ({category_slug: this.slug()}),
-    loader: ({request})=> this.productService.getProducts(request)
-  })
+    request: () => ({ category_slug: this.slug() }),
+    loader: ({ request }) => this.productService.getProducts(request),
+  });
 
   // ngOnChanges() {
   //   this.getProducts();
@@ -61,15 +56,15 @@ export default class ListComponent {
   //   });
   // }
 
-  resetCategories(){
+  resetCategories() {
     this.categoriesResource.set([]);
   }
 
-  reloadCategories(){
+  reloadCategories() {
     this.categoriesResource.reload();
   }
 
-  reloadProducts(){
+  reloadProducts() {
     this.productsResource.reload();
   }
 }

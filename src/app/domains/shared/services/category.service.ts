@@ -10,14 +10,12 @@ export class CategoryService {
   private http = inject(HttpClient);
 
   getAll() {
-    return this.http.get<Category[]>(
-      `${environment.apiUrl}/api/v1/categories`,
-    );
+    return this.http.get<Category[]>(`${environment.apiUrl}/api/v1/categories`);
   }
 
-  getAllPromises(){
+  getAllPromises() {
     return fetch(`${environment.apiUrl}/api/v1/categories`)
-    .then(response => response.json())
-    .then(data => data);
+      .then((response) => response.json())
+      .then((data) => data);
   }
 }

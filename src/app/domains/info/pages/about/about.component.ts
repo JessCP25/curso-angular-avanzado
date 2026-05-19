@@ -11,7 +11,13 @@ import { BehaviorSubject, delay, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-about',
-  imports: [CommonModule, CounterComponent, WaveAudioComponent, HighlightDirective , FormsModule],
+  imports: [
+    CommonModule,
+    CounterComponent,
+    WaveAudioComponent,
+    HighlightDirective,
+    FormsModule,
+  ],
   templateUrl: './about.component.html',
 })
 export default class AboutComponent {
@@ -19,14 +25,14 @@ export default class AboutComponent {
   message = signal('Hola');
 
   observableWithInit$ = new BehaviorSubject<string>('initial value');
-  $withInit = toSignal(this.observableWithInit$ , {
-    requireSync: true
-  })
+  $withInit = toSignal(this.observableWithInit$, {
+    requireSync: true,
+  });
 
   observableWithoutInit$ = new Subject<string>();
   $withoutInit = toSignal(this.observableWithoutInit$.pipe(delay(3000)), {
-    initialValue: '-----'
-  })
+    initialValue: '-----',
+  });
 
   changeDuration(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -38,11 +44,11 @@ export default class AboutComponent {
     this.message.set(input.value);
   }
 
-  emitWithInit(){
-    this.observableWithInit$.next('new value')
+  emitWithInit() {
+    this.observableWithInit$.next('new value');
   }
 
-  emitWithoutInit(){
-    this.observableWithoutInit$.next('*******')
+  emitWithoutInit() {
+    this.observableWithoutInit$.next('*******');
   }
 }

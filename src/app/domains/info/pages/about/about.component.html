@@ -6,21 +6,19 @@
     delectus numquam aliquid itaque nulla. Alias fugiat est, voluptatem commodi
     soluta, ad et eveniet odit rem perferendis porro, quidem iste.
   </p>
-  <p class="text-base">
-    Numero de clientes
-  </p>
-  <input [(ngModel)]="duration" type="range" min="0" max="1000">
-  <p>Message father: {{message()}} </p>
-      @if (duration() > 0) {
-      <app-counter [duration]="duration()" [(message)]="message" />
-    }
+  <p class="text-base">Numero de clientes</p>
+  <input [(ngModel)]="duration" type="range" min="0" max="1000" />
+  <p>Message father: {{ message() }}</p>
+  @if (duration() > 0) {
+    <app-counter [duration]="duration()" [(message)]="message" />
+  }
   <div>
     <app-wave-audio audioUrl="assets/audio.mp3" />
   </div>
 
-  <p>with init: {{$withInit()}} </p>
+  <p>with init: {{ $withInit() }}</p>
   <button (click)="emitWithInit()">emit with init</button>
 
-  <p>without init: {{$withoutInit()}} </p>
+  <p>without init: {{ $withoutInit() }}</p>
   <button (click)="emitWithoutInit()">emit without init</button>
 </div>
